@@ -14,10 +14,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False#SQLAlchemy has its own track 
 app.secret_key = "jose"#security purpose 2
 api = Api(app)#a set of functions and procedures "allowing" the creation of applications,creating Api app
 
-@app.before_first_request#1 it runs before the first request whtaever it may be
-def create_tables():
-    db.create_all()
-
 jwt = JWT(app,authenticate,identity)#/auth
 
 api.add_resource(Store,"/store/<string:name>")
