@@ -1,3 +1,4 @@
+import os
 from flask import Flask,request
 from flask_restful import Api#An(API) is a set of routines, protocols, and tools for building software applications.
 # Basically, an API specifies how software components should interact
@@ -9,7 +10,7 @@ from resources.user import UserRegister
 from resources.store import Store,StoreList
 
 app=Flask(__name__)#"creating" a flask app
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"#2#where to find "data.db" file
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL","sqlite:///data.db")#2#where to find "data.db" file
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False#SQLAlchemy has its own track modification
 app.secret_key = "jose"#security purpose 2
 api = Api(app)#a set of functions and procedures "allowing" the creation of applications,creating Api app
